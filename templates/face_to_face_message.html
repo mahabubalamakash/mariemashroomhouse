@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Measage Page</title>
+{% load static %}
+<!---------------------Style Css---------------------------------->
+<style>
+body{
+top:0;
+margin: 0;
+}
+.navigation_bar{
+top: 0px;
+margin-top: 0px;
+position:fixed;
+background-color: whitesmoke;
+padding: 8px;
+width: 100%;
+box-shadow: 2px 2px 2px 2px gray;
+}
+.message_show{
+top:0;
+margin: 0;
+display: block;
+background-color: whitesmoke;
+width: 100%;
+height: 30em;
+padding: 10px;
+overflow-y: auto;
+margin-top: 44px;
+word-break: break-all;
+}
+.profile_image_sender_recever{
+width: 40px;
+height: 40px;
+border-radius: 50%;
+}
+.username{
+top: 0;
+margin-left: 50px;
+margin-top: -30px;
+font-weight: bold;
+}
+.message_box{
+display: grid;
+grid-template-columns: auto auto;
+background-color: purple;
+gap: 10px;
+font-size: 100%;
+width: 100%;
+height: 100%;
+float: left;
+}
+.send_button{
+width: 100%;  
+font-size: 100%;
+float: left;
+height: 45px;
+background-color: rgb(33, 150, 243);
+color: white;
+border: 0px;
+}
+.text_input{
+width: 100%;  
+font-size: 100%;
+float: left;
+height: 40px;
+}
+</style>
+
+</head>
+<body>
+<!----------------------------Top Navigation Bar-------------------------->
+<div id="navigation_bar"  class="navigation_bar">
+<a href="/" style="text-decoration: none;"><img src="{% static 'Logo/home.ico' %}" style="width: 30px;height: 30px;"></a>
+<a href="#" style="text-decoration: none;"><img src="{% static 'Logo/notificationl.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/FINDE_FRIEND" style="text-decoration: none;"><img src="{% static 'Logo/find friend.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/INCOMMING_MESSAGE_PAGE" style="text-decoration: none;"><img src="{% static 'Logo/messenger.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/VIDEOS_CONTENT" style="text-decoration: none;"><img src="{% static 'Logo/videos.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/BLOG_PAGE" style="text-decoration: none;"><img src="{% static 'Logo/blog.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;border-radius: 50px;"></a>
+<a href="/{{request.user.profile_model.pk}}/SETTING_PAGE" style="text-decoration: none;"><img src="{{request.user.profile_model.profile_image.url}}" style="width: 30px;height: 30px;margin-left: 15px;border-radius: 50px;"></a>
+</div>
+<br>
+<!---------------------------Show All Message------------>
+<div class="message_show">
+{% for CURRENT_SENDER_RECEVER_MESSAGE in FINDING_SEND_RECEV_MESSAGE %}
+{% if request.user.profile_model == CURRENT_SENDER_RECEVER_MESSAGE.sender and CURRENT_PUBLIC == CURRENT_SENDER_RECEVER_MESSAGE.recever or CURRENT_PUBLIC == CURRENT_SENDER_RECEVER_MESSAGE.sender and request.user.profile_model == CURRENT_SENDER_RECEVER_MESSAGE.recever %}
+<img class="profile_image_sender_recever" src="{{CURRENT_SENDER_RECEVER_MESSAGE.sender.profile_image.url}}">
+<p class="username">{{CURRENT_SENDER_RECEVER_MESSAGE.sender.username}}</p>
+<p class="text_message">{{CURRENT_SENDER_RECEVER_MESSAGE.text_message}}</p>
+<!----------------------Checkin Seen------------------------------------->
+{% if CURRENT_SENDER_RECEVER_MESSAGE.sender == request.user.profile_model %}
+{% if CURRENT_SENDER_RECEVER_MESSAGE.seen == True %}
+<p class="seen" style="margin-left:60px;font-size:70%;color:lime;">Seen</p>
+{% else %}
+<p class="seen" style="margin-left:60px;font-size:70%;color:deeppink;">Sending</p>
+{% endif %}
+{% endif %}
+{% endif %}
+{% endfor %}
+</div>
+
+<form enctype="multipart/form-data" action="" method="post" class="forms"> 
+{% csrf_token %}
+<div class="message_box">
+
+<div>
+<input class="text_input" type="text" name="text_message" placeholder="Write Text Message" autofocus="autofocus">
+</div>
+<div>
+<button type="submit" class="send_button" name="send_button">Send</button>
+</div>
+</div>
+</form>
+
+</body>
+</html>

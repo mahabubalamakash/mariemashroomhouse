@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buy Product</title>
+{% load static %}
+<!---------------------------Style Css------------------------------->
+<style>
+body{
+top:0;
+margin: 0;
+margin-top: 0px;
+}
+.main_content_div{
+position: fixed;
+overflow-y: scroll;
+width: 100%;
+height: 100%;
+}
+.frame_container{
+margin-top: -30px;
+width: 100%;
+overflow: hidden;
+}
+.heading_div{
+position: fixed;
+display: flex;
+top:0;
+margin-top: 0px;
+background-color: rgb(33, 150, 243);
+width: 100%;
+height: 40px;
+padding: 10px;
+text-align: center;
+justify-content: center;
+box-shadow: 2px 2px 2px 2px gray;
+}
+.heading{
+top: 0;
+margin-top: 0px;
+}
+/*---------------Home Delevery-------------------------*/
+.home_delevery_div{
+display: grid;
+grid-template-columns: auto;
+text-align: center;
+width: 100%;
+height: 100%;
+}
+.hname,.haddress,.hphone,.hsubmit{
+font-size: 100%;
+margin-top: 10px;
+width: 100%;
+height: 25px;
+margin-top: 10px;
+}
+.hname{
+margin-top: 10px;
+}
+.haddress{
+margin-top: 10px;
+}
+.hphone{
+margin-top: 10px;
+}
+/*---------------Kuriar Delevery-------------------------*/
+.kuriar_delevery_div{
+display: grid;
+grid-template-columns: auto;
+text-align: center;
+width: 100%;
+height: 100%;
+}
+/*------------------------------------*/
+.kname,.kaddress,.kphone,.ksubmit{
+font-size: 100%;
+margin-top: 10px;
+width: 100%;
+height: 25px;
+margin-top: 10px;
+}
+.order_select{
+font-size: 100%;
+width: 100%;
+height: 25px;
+}
+.hsubmit,.ksubmit{
+cursor: pointer;
+border: 0;
+background-color: rgb(246, 185, 246);
+}
+.hsubmit:hover{
+background-color: lime;
+}
+.ksubmit:hover{
+background-color: lime;
+}
+</style>
+
+</head>
+<body>
+<!---------------------------------------------------------->
+<div class="main_content_div">
+
+<div class="heading_div">
+<h2 class="heading">পন্যটি কিনতে অর্ডার করুন</h2>
+</div>   
+<!------------------------Back Home Page Button Icon------------------------>
+<a href="/"><img src="{% static 'Logo/home.ico' %}" style="width: 40px;height: 40px;margin-top: 70px;margin-left: 5px;"></a>
+<!----------------------------------------------------------------------------------------->
+<div class="frame_container">
+<!-----------------Pyable Forms Home Delevery---------------->
+<div class="home_delevery_div">
+<h2 class="heading_home">হোম ডেলিভারি</h2>
+</div>  
+
+<div id="pyable_forms_home_div" class="pyable_forms_home_div">
+<div>
+<form enctype="multipart/form-data" action="" method="post">
+{% csrf_token %}
+<select class="order_select" name="weight">
+<option>১ কেজি</option>
+<option>২ কেজি</option>
+<option>৩ কেজি</option>
+<option>৫ কেজি</option>
+<option>৫০০ গ্রাম</option>
+<option>২৫০ গ্রাম</option>
+<option>২০০ গ্রাম</option>
+<option>১০০ গ্রাম</option>
+</select>
+<input type="text" id="hname" class="hname" name="hname" value="{{request.user.profile_model.username}}" placeholder="আপনার নাম" autofocus="autofocus">
+<input type="text" id="haddress" class="haddress" name="haddress" value="{{request.user.profile_model.address}}" placeholder="আপনার ঠিকানা">
+<input type="text" id="hphone" class="hphone" name="hphone" value="{{request.user.profile_model.phone}}" placeholder="আপনার মোবাইল নাম্বার">
+<button type="submit" id="hsubmit" class="hsubmit" name="hsubmit">Submit</button>
+</form>
+</div>
+</div>
+<!-----------------Pyable Forms Kuriar Delevery---------------->
+<div class="kuriar_delevery_div">
+<h2 class="heading_kuriar">কুরিয়ার ডেলিভারি</h2>
+</div>  
+
+<div id="pyable_forms_kuriar_div" class="pyable_forms_kuriar_div">
+<div>
+<form enctype="multipart/form-data" action="" method="post">
+{% csrf_token %}
+<select class="order_select" name="weight">
+<option>১ কেজি</option>
+<option>২ কেজি</option>
+<option>৩ কেজি</option>
+<option>৪ কেজি</option>
+<option>৫ কেজি</option>
+<option>১০ কেজি</option>
+<option>৫০০ গ্রাম</option>
+</select>
+<input type="text" id="kname" class="kname" name="kname" value="{{request.user.profile_model.username}}" placeholder="আপনার নাম" autofocus="autofocus">
+<input type="text" id="kphone" class="kphone" name="kphone" value="{{request.user.profile_model.phone}}" placeholder="আপনার মোবাইল নাম্বার">
+<textarea type="text" id="kaddress" class="kaddress" name="kaddress" placeholder="আপনার কুরিয়ার ঠিকানা"></textarea>
+<button type="submit" id="ksubmit" class="ksubmit" name="ksubmit">Submit</button>
+</form>
+<br>
+<br>
+<br>
+</div>
+</div>
+
+</div>
+
+</div> 
+
+</body>
+</html>

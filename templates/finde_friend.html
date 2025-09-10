@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frind Friends Page</title>
+{% load static %}
+<!------------------------Style Css---------------------------------->
+<style>
+body{
+top: 0;
+margin: 0;
+}
+.navigation_bar{
+top: 0px;
+margin-top: 0px;
+position:fixed;
+background-color: whitesmoke;
+padding: 8px;
+width: 100%;
+box-shadow: 2px 2px 2px 2px gray;
+z-index: 1;
+}
+.profile_image{
+width: 40px;
+height: 40px;
+border-radius: 50%;
+}
+.all_friends{
+display: grid;
+grid-template-columns: auto ;
+width: 95%;
+height: 100%;
+margin: 10px;
+margin-top: 20px;
+background-color: rgb(208, 208, 213);
+border-radius: 10px;
+box-shadow: 1px 1px 1px 1px gray;
+font-size: 80%;
+}
+
+</style>
+
+</head>
+<body>
+<!----------------------------Top Navigation Bar-------------------------->
+<div id="navigation_bar"  class="navigation_bar">
+<a href="/" style="text-decoration: none;"><img src="{% static 'Logo/home.ico' %}" style="width: 30px;height: 30px;"></a>
+<a href="#" style="text-decoration: none;"><img src="{% static 'Logo/notificationl.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/FINDE_FRIEND" style="text-decoration: none;"><img src="{% static 'Logo/find friend.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/INCOMMING_MESSAGE_PAGE" style="text-decoration: none;"><img src="{% static 'Logo/messenger.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/VIDEOS_CONTENT" style="text-decoration: none;"><img src="{% static 'Logo/videos.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/BLOG_PAGE" style="text-decoration: none;"><img src="{% static 'Logo/blog.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;border-radius: 50px;"></a>
+<a href="/{{request.user.profile_model.pk}}/SETTING_PAGE" style="text-decoration: none;"><img src="{{request.user.profile_model.profile_image.url}}" style="width: 30px;height: 30px;margin-left: 15px;border-radius: 50px;"></a>
+</div>
+
+<br>
+<br>
+<br>
+
+<!----------------------All Register User------------------------>
+{% for USER in ALL_USER %}
+<div class="all_friends">
+<a href="/{{USER.pk}}/FACE_TO_FACE_MESSAGE" style="text-decoration: none;"> 
+<img class="profile_image" src="{{USER.profile_image.url}}"> 
+<p style="margin-top: -30px;margin-left: 50px;color: black;font-weight: bold;">{{USER.username}}</p>
+</a>
+</div>
+{% endfor %}
+
+</body>
+</html>

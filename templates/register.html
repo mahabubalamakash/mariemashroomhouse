@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register Page</title>
+{% load static %}
+<!---------------------------Style Css-------------------------------->
+<style>
+body{
+top: 0;
+margin: 0px;
+}
+.main_div{
+position: fixed;
+display: grid;
+row-gap: 10px;
+margin-top: 10px;
+text-align: center;
+}
+.login_logo{
+width: 100px;
+height: 100px;
+}
+.input{
+font-size: 120%;
+width: 100%;
+padding: 2px;
+margin-top: 18px;
+border: 0px;
+background-color: rgb(144, 245, 238);
+}
+.input:hover{
+background-color: rgb(237, 181, 237);
+}
+.loging_register{
+margin-left: 5px;
+text-decoration: none;
+font-size: 120%;
+}
+.submit_button{
+background-color: rgb(33, 150, 243);
+color: white;
+cursor: pointer;
+width: 100%;
+padding: 5px;
+font-size: 120%;
+margin-top: 20px;
+border: 0px;
+}
+</style>
+</head>
+<body>
+<!--------------------Register Forms--------------------------------->
+<div class="main_div">
+
+<div clas="login_logo_div"><img src="{% static 'Logo/login logo.jpg' %}" class="login_logo"></div>
+
+<div>
+<form enctype="multipart/form-data" method="post">
+{% csrf_token %}
+<input type="text" id="username" class="input" name="username" placeholder="একটি ইউজার নাম দিন" autofocus="autofocus" required="required">
+<input type="text" id="address" class="input" name="address" placeholder="আপনার ঠিকানা দিন" required="required">
+<input type="text" id="phone" class="input" name="phone" placeholder="আপনার মোবাইল নাম্বার দিন" required="required">
+<input type="password" id="passwords1" class="input" name="password1" placeholder="একটি পাসওয়ার্ড দিন" required="required">
+<input type="password" id="passwords2" class="input" name="password2" placeholder="পুনরায় পাসওয়ার্ড দিন" required="required">
+<button type="submit" id="submit_button" class="submit_button" name="sumbits">Submit</button>
+</form>
+</div>
+
+<strong>আপনি যদি আগে থেকে রেজিস্টার করে থাকেন তাহলে এখানে লগইন করুন  [<a href="LOGIN_PAGE" class="loging_register" id="register">লগইন</a> ]</strong>
+<strong style="margin-top: 20px;font-size: 120%;"><a href="/" style="text-decoration: none;">হোম পেজে ফিরে যান</a></strong>
+
+</div>
+
+</body>
+</html>

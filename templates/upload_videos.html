@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upload Videos Page</title>
+{% load static %}
+<!---------------------------Style Css------------------------------------->
+<style>
+.navigation_bar{
+top: 0px;
+margin-top: 0px;
+position:fixed;
+background-color: whitesmoke;
+padding: 8px;
+width: 100%;
+box-shadow: 2px 2px 2px 2px gray;
+z-index: 1;
+}
+.main_div{
+display: grid;
+row-gap: 10px;
+margin-top: 10px;
+margin-top: 10px;
+}
+.videos_upload,.submits{
+width: 100%;
+cursor: pointer;
+font-size: 100%;
+margin-top: 20px;
+border: 0;
+background-color: rgb(33, 150, 243);
+color: white;
+}
+.submits{
+padding: 10px;
+}
+</style>
+</head>
+<body>
+<!----------------------------Top Navigation Bar-------------------------->
+<div id="navigation_bar"  class="navigation_bar">
+<a href="/" style="text-decoration: none;"><img src="{% static 'Logo/home.ico' %}" style="width: 30px;height: 30px;"></a>
+<a href="#" style="text-decoration: none;"><img src="{% static 'Logo/notificationl.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/FINDE_FRIEND" style="text-decoration: none;"><img src="{% static 'Logo/find friend.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/INCOMMING_MESSAGE_PAGE" style="text-decoration: none;"><img src="{% static 'Logo/messenger.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/VIDEOS_CONTENT" style="text-decoration: none;"><img src="{% static 'Logo/videos.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/BLOG_PAGE" style="text-decoration: none;"><img src="{% static 'Logo/blog.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;border-radius: 50px;"></a>
+<a href="/{{request.user.profile_model.pk}}/SETTING_PAGE" style="text-decoration: none;"><img src="{{request.user.profile_model.profile_image.url}}" style="width: 30px;height: 30px;margin-left: 15px;border-radius: 50px;"></a>
+</div>
+<br>
+<br>
+<br>
+<br>
+<!--------------------Upload Videos Forms--------------------------------->
+<div class="main_div">
+<div>
+<form enctype="multipart/form-data" method="post" class="input"> 
+{% csrf_token %}
+<input type="file" accept="video/*" class="videos_upload" name="videos_upload" required="required">
+<button type="submit" id="submits" class="submits" name="submits">Submit</button> 
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kuriar Delevery Information</title>
+{% load static %}
+<!------------------------Style Css------------------------------------>
+<style>
+body{
+top: 0;
+margin: 0;
+}
+.main_div{
+top:0;
+margin: 0;
+display: grid;
+grid-template-columns: auto auto;
+gap: 5px;
+width: 100%;
+height: 100%;
+}
+.main_div > div{
+top:0;
+margin: 0;
+background-color: rgb(33, 150, 243);
+padding: 10px;
+text-align: center;
+}
+.top_link{
+text-decoration:none;
+color:white;
+}
+.home_info_table{
+margin-top: 30px;
+}
+table,thead,tbody,tr,th,td{
+border: 1px solid black;
+width: 100%;
+font-size: 100%;
+white-space: wrap;
+word-break: wrap;
+overflow-x: auto;
+}
+thead{
+background-color: black;
+color: white;
+}
+</style>
+</head>
+<body>
+<!------------------------Top Bar---------------------------------------------->
+<div class="main_div">
+<div class="home"><a href="/{{request.user.profile_model.pk}}/HOME_DELEVERY_INFORMATION" class="top_link">Home Delevery Info</a></div>
+<div class="kuriar" style="background-color: green;"><a href="/{{request.user.profile_model.pk}}/KURIAR_DELEVERY_INFORMATION" class="top_link">Kuriar Delevery Info</a></div>
+</div>
+<!--------------------Back Button Icon--------------------------------------->
+<a href="/"><img src="{% static 'Logo/home.ico' %}" style="width: 40px;height: 40px;margin-top: 5px;margin-left: 5px;"></a>
+<!--------------------Heading--------------------------------------->
+<h1 style="text-align: center;">Kuriar Delevery Information</h1>
+<!------------------------------------------------------------------>
+<div class="home_info_table">
+<table>
+<!--------------------Table Header------------------------------>
+<thead>
+<tr>
+<th class="home_item" style="width: 15%;">Item</th>
+<th class="home_item" style="width: 15%;">Weight</th>
+<th class="home_item" style="width: 15%;">Name</th>
+<th class="home_item" style="width: 15%;">Address</th>
+<th class="home_item" style="width: 15%;">Phone</th>
+<th class="home_item" style="width: 15%;">Photo</th>
+</tr>
+</thead>
+<!------------------------Table Body-------------------------------->
+<tbody>
+{% for CUSTOMAR_ORDER in KURIAR_DELEVERY_INFORMATION %}
+<tr>
+<td class="home_body" style="width: 15%;">{{CUSTOMAR_ORDER.item_name}}</td>
+<td class="home_body" style="width: 15%;">{{CUSTOMAR_ORDER.weight}}</td>
+<td class="home_body" style="width: 15%;">{{CUSTOMAR_ORDER.customars_name2}}</td>
+<td class="home_body" style="width: 15%;">{{CUSTOMAR_ORDER.kuriar_address}}</td>
+<td class="home_body" style="width: 15%;">{{CUSTOMAR_ORDER.customars_phone}}</td>
+<td class="home_body" style="width: 15%;"><a href="{{CUSTOMAR_ORDER.kuriar_product_image.url}}"><img src="{{CUSTOMAR_ORDER.kuriar_product_image.url}}" style="width:50px;height: 50px;border-radius: 50px;"></a></td>
+</tr>
+{% endfor %}
+</tbody>
+
+</table>
+</div>
+    
+</body>
+</html>

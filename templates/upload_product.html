@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upload Product Page</title>
+{% load static %}
+<!---------------------------Style Css-------------------------------->
+<style>
+body{
+top: 0;
+margin: 0;
+}
+.main_div{
+position: fixed;
+display: grid;
+grid-template-columns: auto;
+row-gap: 10px;
+margin-top: 10px;
+text-align: center;
+width: 100%;
+height: 100%;
+}
+.input{
+width: 100%;
+font-size: 120%;
+border: 0px;
+margin-top: 20px;
+padding: 5px;
+background-color: rgb(144, 245, 238);
+color: black;
+}
+.input:hover{
+background-color: rgb(237, 181, 237);
+}
+.submit_button{
+border: 0;
+margin-top: 30px;
+cursor: pointer;
+width: 100%;
+height: 30px;
+background-color: rgb(33, 150, 243);
+color: white;
+font-size: 100%;
+}
+.submit_button:hover{
+background-color: rgb(233, 88, 216);
+}
+
+</style>
+</head>
+<body>
+<!--------------------Register Forms--------------------------------->
+<div class="main_div">
+
+<div>
+<form enctype="multipart/form-data" method="post" class="forms">
+{% csrf_token %}
+<input type="file" accept="image/*" id="image_upload" class="input" name="image_upload" placeholder="ফটো পছন্দ করুন" required="required" autofocus="autofocus">
+<input type="text" id="product_name" class="input" name="product_name" placeholder="পন্যের নাম দিন" required="required">
+<input type="text" id="ammount" class="input" name="ammount" placeholder="পন্যের দাম লিখুন" required="required">
+<input type="text" id="details" class="input" name="details" placeholder="বিস্তারিত আলোচনা করুন" required="required"> <br>
+<button type="submit" id="sumbits" class="submit_button" name="product_upload_button">Submit</button>
+</form>
+</div>
+
+<strong style="font-size: 120%;margin-top: -130px;"><a href="/" style="text-decoration: none;">হোম পেজে ফিরে যান</a></strong>
+
+</div>
+
+</body>
+</html>

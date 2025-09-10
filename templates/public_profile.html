@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setting Page</title>
+{% load static%}
+<!---------------------------Style Css----------------------------------->
+<style>
+body{
+top: 0;
+margin: 0;  
+}
+.profile_image_div{
+top: 0;
+margin: 0;
+background-color: aliceblue;
+text-align: center;
+padding: 10px;
+}
+.profile_image{
+width: 50%;
+height: 50%;
+border-radius: 50%;
+}
+.profile_name{
+top: 0;
+margin: 0;    
+}
+.upload_profile_image{
+width: 100%;
+height: 100%;
+margin-top: 5px;
+font-size: 120%;
+}
+.submit{
+width: 100%;
+height: 30px;
+font-size: 100%;
+margin-top: 5px;
+cursor: pointer;
+}
+#upload_profile_button{
+margin-top: 10px;
+}
+.upload_link_button {
+display: flex;
+column-gap: 15%;
+width: 100%;
+height: 100%;
+text-decoration: none;
+text-align: center;
+background-color: rgb(33, 150, 245);
+padding: 10px;
+
+}
+.upload_product,.upload_video,.upload_blog{
+text-decoration: none;
+font-size: 120%;
+color: white;
+}
+.show_upload_content{
+width: 100%;
+height: 100%;
+background-color: skyblue;
+padding: 100%;
+}
+</style>
+
+</head>
+<body>
+{% for PUBLIC in ALL_PUBLIC %}
+<div class="profile_image_div">
+<div><a href="#"><img class="profile_image" src="{{PUBLIC.profile_image.url}}"></a></div>
+<h1 class="profile_name">{{PUBLIC.username}}</h1>
+ </div>
+<div class="upload_link_button">
+<a href="/{{PUBLIC.pk}}/MESSAGE_BOX" class="upload_product">Message</a>
+</div>
+
+<div class="show_upload_content">
+<div class="all_content"></div>
+</div>
+{% endfor %}
+</body>
+</html>

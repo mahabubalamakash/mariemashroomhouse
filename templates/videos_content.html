@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Videos Content Page</title>
+{% load static %}
+<!-----------------------Style Css------------------------------------->
+<style>
+body{
+top: 0;
+margin: 0;
+}
+.navigation_bar{
+top: 0px;
+margin-top: 0px;
+position:fixed;
+background-color: whitesmoke;
+padding: 8px;
+width: 100%;
+box-shadow: 2px 2px 2px 2px gray;
+}
+.grid_container{
+display: grid;
+grid-template-columns: auto auto;
+gap: 10px;
+margin: 5;
+}
+
+</style>
+</head>
+<body>
+<!----------------------------Top Navigation Bar-------------------------->
+<div id="navigation_bar"  class="navigation_bar">
+<a href="/" style="text-decoration: none;"><img src="{% static 'Logo/home.ico' %}" style="width: 30px;height: 30px;"></a>
+<a href="#" style="text-decoration: none;"><img src="{% static 'Logo/notificationl.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/FINDE_FRIEND" style="text-decoration: none;"><img src="{% static 'Logo/find friend.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/INCOMMING_MESSAGE_PAGE" style="text-decoration: none;"><img src="{% static 'Logo/messenger.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/VIDEOS_CONTENT" style="text-decoration: none;"><img src="{% static 'Logo/videos.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/BLOG_PAGE" style="text-decoration: none;"><img src="{% static 'Logo/blog.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;border-radius: 50px;"></a>
+<a href="/{{request.user.profile_model.pk}}/SETTING_PAGE" style="text-decoration: none;"><img src="{{request.user.profile_model.profile_image.url}}" style="width: 30px;height: 30px;margin-left: 15px;border-radius: 50px;"></a>
+</div>
+<!----------------------------Blog Content--------------------------------->
+<br>
+<br>
+<br>
+<br>
+
+<div class="grid_container">
+<div class="container">
+{% for CONTENT in ALL_UPLOAD_VIDEOS %}
+<video width="400px" height="400px" controls>
+<source src="{{CONTENT.upload_video.url}}" type="video/mp4">
+</video>
+{% endfor %} 
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Templates Page</title>
+{% load static %}
+<!----------------------Style Css------------------------------->
+<style>
+body{
+top: 0;
+margin: 0px;
+}
+.main_div{
+display: grid;
+grid-template-columns: auto auto;
+text-align: center;
+background-color: purple;
+color: white;
+}
+.applogo{
+width: 50px;
+height: 50px;
+border-radius: 50px;
+margin-top: 10px;
+}
+.navigation_bar{
+top: 0px;
+margin-top: 0px;
+position:fixed;
+background-color: whitesmoke;
+padding: 8px;
+width: 100%;
+box-shadow: 2px 2px 2px 2px gray;
+display: grid;
+grid-template-columns: auto auto auto;
+}
+.product_div{
+display:grid;
+grid-template-columns: auto auto;
+text-align: center;
+gap: 5px;
+}
+.product_image{
+width: 100%;
+height: 100%;
+}
+.container{
+background-color: antiquewhite;
+}
+.buy_details_link{
+margin: 18px;
+text-decoration: none;
+font-weight: bold;
+}
+.login_link,.register_link{
+text-decoration: none;
+margin-left: 10px;
+font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<!----------------------------Top Navigation Bar-------------------------->
+<div id="navigation_bar"  class="navigation_bar">
+<a href="/" style="text-decoration: none;"><img src="{% static 'Logo/home.ico' %}" style="width: 30px;height: 30px;"></a>
+<a href="LOGIN_PAGE" class="login_link">Login</a>
+<a href="REGISTER_PAGE" class="register_link">Register</a>
+</div>
+<br>
+<br>
+<br>
+<!----------------------Top Bar Content----------------------------->
+<div id="main_div" class="main_div">
+<div>
+<img src="{% static 'Logo/appicons.ico' %}" class="applogo">
+</div>
+    
+<div>
+<h1 id="headding">মেরী মাশরুম হাউস</h1>
+</div>
+
+</div>
+<!----------------------All Product Content----------------------------->
+
+<div class="product_div">
+{% for PRODUCT in ALL_UPLOAD_PRODUCT %}
+<div class="container">
+<div>
+<p>পন্য : {{PRODUCT.product_name}}</p>
+<a href="{{PRODUCT.product_image.url}}"><img src="{{PRODUCT.product_image.url}}" class="product_image"></a>
+<p>মূল্য : {{PRODUCT.ammount}} টাকা</p>
+<p>
+<a href="/{{PRODUCT.pk}}/BUY_PAGE" class="buy_details_link">কিনুন</a>
+<a href="/{{PRODUCT.pk}}/PRODUCT_DETAILS" class="buy_details_link">বিস্তারিত</a>
+</p>
+
+</div>
+</div>
+{% endfor %}
+</div>
+
+
+</body>
+</html>

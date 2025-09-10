@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Details</title>
+{% load static %}
+<!-------------------Style Css------------------------------------>
+<style>
+
+</style>
+
+</head>
+<body>
+{% for PRODUCT_DETAILS in CURRENT_PRODUCT_DETAIS %}
+<div>
+<strong>{{PRODUCT_DETAILS.details}}</strong>
+</div>
+{% endfor %}
+
+</body>
+</html>

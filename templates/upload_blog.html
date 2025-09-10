@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upload Blog Page</title>
+{% load static %}
+<!----------------------Javascript Static File------------------------>
+<link rel="stylesheet" href="{% static 'Javascript 5.3.2 CDN/js/bootstrap.min.js' %}">
+<!---------------------------Style Css-------------------------------->
+<style>
+.main_div{
+position: fixed;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+row-gap: 10px;
+margin-top: 10px;
+}
+.input{
+display: flex;
+flex-wrap: wrap;
+flex: 100%;
+margin: 5px;
+font-size: 110%;
+background-color: aliceblue;
+}
+.textarea{
+display: flex;
+flex-wrap: wrap;
+flex: 100%;
+margin: 5px;
+margin-top: 20px;
+font-size: 120%;
+resize: none;
+height:150px;
+background-color: aliceblue;
+}
+#submits{
+border: 4px solid rgb(33, 150, 243);
+margin-top: 15px;
+cursor: pointer;
+width: 100%;
+padding: 5px;
+}
+#submits:hover{
+background-color: rgb(33, 150, 243);
+color: white;
+}
+.video_image{
+width: 100%;
+cursor: pointer;
+font-size: 100%;
+}
+</style>
+</head>
+<body>
+
+<!-----------------------Topbar Home Button Icon------------------------------------->
+<div class="topbar">
+<a href="/" class="img_link" ><img src="{% static 'Logo/home.ico' %}" style="width: 35px;height: 35px;margin-top: -2px;"></a>
+</div>
+<!--------------------Upload Blog Forms--------------------------------->
+<div class="main_div">
+<div>
+<form enctype="multipart/form-data" method="post" class="input"> 
+{% csrf_token %}
+<input type="file" accept="image/*" class="video_image" name="image" required="required">
+<button type="submit" id="submits" class="submits" name="submits">Submits</button> 
+</form>
+</div>
+
+</div>
+
+</body>
+</html>

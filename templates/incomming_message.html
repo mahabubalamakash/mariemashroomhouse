@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Incomming Message Page</title>
+{% load static %}
+<!---------------------Style Css---------------------->
+<style>
+body{
+top:0;
+margin: 0;
+}
+.navigation_bar{
+top: 0px;
+margin-top: 0px;
+position:fixed;
+background-color: whitesmoke;
+padding: 8px;
+width: 100%;
+box-shadow: 2px 2px 2px 2px gray;
+z-index: 1;
+}
+.show_incomming_message_div{
+width: 100%;
+height: 100%;
+}
+.show_incomming_message_div{
+display: grid;
+grid-template-columns: auto ;
+width: 95%;
+height: 100%;
+margin: 10px;
+margin-top: 20px;
+border-radius: 0px;
+background-color: rgb(239, 211, 245);
+overflow: hidden;
+}
+.profile_image{
+width: 30px;
+height: 30px;
+border-radius: 50%;
+margin-top: 5px;
+}
+.text_message{
+margin-left: 60px;
+margin-top: -45px;
+}
+.username{
+font-size: 80%;
+}
+</style>
+
+</head>
+<body>
+<!----------------------------Top Navigation Bar-------------------------->
+<div id="navigation_bar"  class="navigation_bar">
+<a href="/" style="text-decoration: none;"><img src="{% static 'Logo/home.ico' %}" style="width: 30px;height: 30px;"></a>
+<a href="#" style="text-decoration: none;"><img src="{% static 'Logo/notificationl.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/FINDE_FRIEND" style="text-decoration: none;"><img src="{% static 'Logo/find friend.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/INCOMMING_MESSAGE_PAGE" style="text-decoration: none;"><img src="{% static 'Logo/messenger.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/VIDEOS_CONTENT" style="text-decoration: none;"><img src="{% static 'Logo/videos.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/BLOG_PAGE" style="text-decoration: none;"><img src="{% static 'Logo/blog.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;border-radius: 50px;"></a>
+<a href="/{{request.user.profile_model.pk}}/SETTING_PAGE" style="text-decoration: none;"><img src="{{request.user.profile_model.profile_image.url}}" style="width: 30px;height: 30px;margin-left: 15px;border-radius: 50px;"></a>
+</div>
+<br>
+<br>
+<!---------------------Show Incomming Message------------------->
+{% for CURRENT_SENDER_RECEVER_MESSAGE in FINDING_SEND_RECEV_MESSAGE %}
+{% if request.user.profile_model == CURRENT_SENDER_RECEVER_MESSAGE.recever %}
+<div class="show_incomming_message_div">
+<strong class="username">{{CURRENT_SENDER_RECEVER_MESSAGE.sender}}</strong>
+<a href="/{{CURRENT_SENDER_RECEVER_MESSAGE.sender.pk}}/FACE_TO_FACE_MESSAGE"><img class="profile_image" src="{{CURRENT_SENDER_RECEVER_MESSAGE.sender.profile_image.url}}"></a>
+</div>
+<p class="text_message">{{CURRENT_SENDER_RECEVER_MESSAGE.text_message}}</strong>
+{% endif %}
+{% endfor %}
+
+</body>
+</html>
