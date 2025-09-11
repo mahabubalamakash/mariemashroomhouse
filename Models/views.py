@@ -12,12 +12,18 @@ from django.db.models import Q
 
 class HOME_PAGE(View):
     def get(self,request):
+        self.notification = ''
+        self.count_notification = ''
         ALL_UPLOAD_PRODUCT = upload_product.objects.filter().order_by('-id')
-        self.notification_list = []
-        noti = request.user.profile_model.welcome_notification
-        self.notification_list.append(str(noti))
-        self.notification_length = len(self.notification_list)
-        return render(request,'index.html',{'ALL_UPLOAD_PRODUCT':ALL_UPLOAD_PRODUCT,'notification_length':self.notification_length})
+        current_notification = profile_model.objects.filter()
+        for all_notification in current_notification:
+            self.notification = str(all_notification.welcome_notification)
+            if self.notification == '':
+                pass
+            else:
+                self.count_notification = self.notification.count(self.notification)
+
+        return render(request,'index.html',{'ALL_UPLOAD_PRODUCT':ALL_UPLOAD_PRODUCT,'notification':self.notification,'count_notification':self.count_notification})
 
     def post(self,request):
         pass
@@ -351,3 +357,26 @@ class NOTIFICATON_PAGE_VIEW(View):
     def get(self,request,pk):
         NOTIFICATION_WELECOME = profile_model.objects.filter(id=pk)
         return render(request,'notification.html',{'NOTIFICATION_WELECOME':NOTIFICATION_WELECOME})
+
+    def post(self,request,pk):
+        if 'delete_button' in request.POST:
+            NOTIFICATION_WELECOME = profile_model.objects.filter(id=pk)
+            for notification in NOTIFICATION_WELECOME:
+                NOTIFICATION = notification.welcome_notification
+                DELETE_NOTIFICATION = profile_model(
+                    id=request.user.profile_model.pk,
+                    username =notification.username,
+                    address =notification.address ,
+                    phone =notification.phone ,
+                    password1 =notification.password1 ,
+                    password2 =notification.password2 ,
+                    profile_image =notification.profile_image ,
+                    is_saller =notification.is_saller ,
+                    welcome_notification = '' ,
+
+                                            )
+                DELETE_NOTIFICATION.save()
+
+                return redirect('/'+str(request.user.profile_model.pk) + '/' +'NOTIFICATON_PAGE_VIEW')
+
+

@@ -66,10 +66,11 @@ margin: 0;
 display: none;
 position: absolute;
 margin-top: 0px;
-float: right;
+float: left;
 background-color: #f9f9f9;
 box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 z-index: 1;
+margin-left: -60px;
 }
 .dropdown_content a{
 top: 0;
@@ -84,7 +85,7 @@ padding: 14px 16px;
 cursor: pointer;
 }
 .dropdown_div{
-margin-top: -45px;
+margin-top: -35px;
 margin-left: 300px;
 }
 .show {
@@ -97,20 +98,8 @@ font-weight: bold;
 float: right;
 margin-left: 0px;
 margin-right: 20px;
-}
-.current_notificatio{
-
-color: rgb(245, 55, 55);
-text-align: center;
-width: 20px;
-height: 22px;
-border-radius: 50%;
-margin-top: -30px;
-margin-left: 55px;
-font-size: 120%;
-
-}
-
+margin-top: 20px;
+};
 </style>
 </head>
 <body>
@@ -123,8 +112,6 @@ font-size: 120%;
 <a href="/{{request.user.profile_model.pk}}/INCOMMING_MESSAGE_PAGE" style="text-decoration: none;"><img src="{% static 'Logo/messenger.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
 <a href="/{{request.user.profile_model.pk}}/VIDEOS_CONTENT" style="text-decoration: none;"><img src="{% static 'Logo/videos.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
 <a href="/{{request.user.profile_model.pk}}/BLOG_PAGE" style="text-decoration: none;"><img src="{% static 'Logo/blog.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;border-radius: 50px;"></a>
-<!--------------------show Notificaion----------------------->
-<p class="current_notificatio">{{notification_length}}</p>
 <!------------------------------Droapdown Profile Menu------------------------>
 <div class="dropdown_div">
 <img src="{{request.user.profile_model.profile_image.url}}" class="dropbtn_profile_image" style="width: 30px;height: 30px;border-radius: 50px;" onclick="accountFunction()">
@@ -156,6 +143,12 @@ myDropdown.classList.remove('show');
 }
 }
 </script>
+<!--------------------show Notificaion----------------------->
+{% if notification != '' %}
+<a href="/{{request.user.profile_model.pk}}/NOTIFICATON_PAGE_VIEW"><div style="width: 20px;height: 20px;background-color: red;color: wheat;text-align: center;border-radius: 50px;margin-top: 30px;margin-left: 62px;z-index: 1;position: fixed;">{{count_notification}}</div></a>
+{% else %}
+{{pass}}
+{% endif %}
 <br>
 <br>
 <br>
@@ -171,7 +164,6 @@ myDropdown.classList.remove('show');
 
 </div>
 <!----------------------All Product Content----------------------------->
-
 <div class="product_div">
 {% for PRODUCT in ALL_UPLOAD_PRODUCT %}
 <div class="container">
@@ -188,7 +180,6 @@ myDropdown.classList.remove('show');
 </div>
 {% endfor %}
 </div>
-
 
 </body>
 </html>

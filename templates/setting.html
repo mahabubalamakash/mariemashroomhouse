@@ -39,6 +39,7 @@ margin-top: 0px;
 float: right;
 background-color: #f9f9f9;
 box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+margin-left: -100px;
 z-index: 1;
 }
 .dropdown_content a{
@@ -112,7 +113,7 @@ text-align: center;
 background-color: rgb(33, 150, 245);
 padding: 5px;
 }
-.upload_product,.upload_video,.upload_blog,.delevery_info{
+.upload_product,.upload_video,.upload_blog,.delevery_info,.setting,.logout{
 text-decoration: none;
 font-size: 80%;
 color: white;
@@ -154,7 +155,7 @@ cursor: pointer;
 <!---------------------------Top Navigation Bar----------------------------->
 <div id="navigation_bar"  class="navigation_bar">
 <a href="/" style="text-decoration: none;"><img src="{% static 'Logo/home.ico' %}" style="width: 30px;height: 30px;"></a>
-<a href="#" style="text-decoration: none;"><img src="{% static 'Logo/notificationl.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/NOTIFICATON_PAGE_VIEW" style="text-decoration: none;"><img src="{% static 'Logo/notificationl.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
 <a href="/{{request.user.profile_model.pk}}/FINDE_FRIEND" style="text-decoration: none;"><img src="{% static 'Logo/find friend.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
 <a href="/{{request.user.profile_model.pk}}/INCOMMING_MESSAGE_PAGE" style="text-decoration: none;"><img src="{% static 'Logo/messenger.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
 <a href="/{{request.user.profile_model.pk}}/VIDEOS_CONTENT" style="text-decoration: none;"><img src="{% static 'Logo/videos.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
@@ -163,7 +164,7 @@ cursor: pointer;
 <div class="dropdown_div">
 <img src="{{request.user.profile_model.profile_image.url}}" class="dropbtn_profile_image" style="width: 30px;height: 30px;border-radius: 50px;" onclick="accountFunction()">
 <div class="dropdown_content" id="myDropdown">
-<a href="/{{request.user.profile_model.pk}}/SETTING_PAGE">Setting</a>
+<a href="/{{request.user.profile_model.pk}}/SETTING_PAGE" class="setting">Setting</a>
 <form enctype="multipart/form-data" method="post">
 {% csrf_token %}
 {% if request.user.profile_model.is_saller == True %}
@@ -172,7 +173,7 @@ cursor: pointer;
 <a href="/{{request.user.profile_model.pk}}/UPLOAD_BLOG_PAGE" class="upload_blog" name="bloag_upload">Bloag Post</a>
 <a href="/{{request.user.profile_model.pk}}/HOME_DELEVERY_INFORMATION" class="delevery_info" name="delevery_info">Delevery Info</a>
 {% endif %}
-<a href="/LOGOUT_PAGE" style="background-color: red;color: white;">Logout</a>
+<a href="/LOGOUT_PAGE" style="background-color: red;color: white;" class="logout">Logout</a>
 </form>
 </div>
 </div>

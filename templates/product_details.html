@@ -7,14 +7,106 @@
 {% load static %}
 <!-------------------Style Css------------------------------------>
 <style>
-
+body{
+top:0px;
+margin: 0px;
+}
+.navigation_bar{
+top: 0px;
+margin-top: 0px;
+position:fixed;
+background-color: whitesmoke;
+padding: 8px;
+width: 100%;
+box-shadow: 2px 2px 2px 2px gray;
+}
+/*--------------------Droapdown Accounts-----------------*/
+.dropdown_div .dropbtn_profile_image {
+cursor: pointer;
+font-size: 120%;
+border: none;
+outline: none;
+color: white;
+background-color: inherit;
+font-family: inherit;
+margin: 0;
+}
+.dropdown_content {
+display: none;
+position: absolute;
+margin-top: 0px;
+float: left;
+background-color: #f9f9f9;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+z-index: 1;
+margin-left: -60px;
+}
+.dropdown_content a{
+top: 0;
+margin-top: 0px;
+display: block;
+color: black;
+text-decoration: none;
+text-align: left;
+padding: 14px 16px;
+}
+.dropbtn_profile_image{
+cursor: pointer;
+}
+.dropdown_div{
+margin-top: -35px;
+margin-left: 300px;
+}
+.show {
+display: block;
+}
 </style>
 
 </head>
 <body>
+<!----------------------------Top Navigation Bar-------------------------->
+<div id="navigation_bar"  class="navigation_bar">
+<a href="/" style="text-decoration: none;"><img src="{% static 'Logo/home.ico' %}" style="width: 30px;height: 30px;"></a>
+{% if request.user.is_authenticated %}
+<a href="/{{request.user.profile_model.pk}}/NOTIFICATON_PAGE_VIEW" style="text-decoration: none;"><img src="{% static 'Logo/notificationl.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/FINDE_FRIEND" style="text-decoration: none;"><img src="{% static 'Logo/find friend.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/INCOMMING_MESSAGE_PAGE" style="text-decoration: none;"><img src="{% static 'Logo/messenger.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/VIDEOS_CONTENT" style="text-decoration: none;"><img src="{% static 'Logo/videos.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/BLOG_PAGE" style="text-decoration: none;"><img src="{% static 'Logo/blog.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;border-radius: 50px;"></a>
+<!------------------------------Droapdown Profile Menu------------------------>
+<div class="dropdown_div">
+<img src="{{request.user.profile_model.profile_image.url}}" class="dropbtn_profile_image" style="width: 30px;height: 30px;border-radius: 50px;" onclick="accountFunction()">
+<div class="dropdown_content" id="myDropdown">
+<a href="/{{request.user.profile_model.pk}}/SETTING_PAGE">Setting</a>
+<a href="LOGOUT_PAGE" style="background-color: red;color: white;">Logout</a>
+{% endif %}
+</div>
+</div>
+</div>
+<!------------------------Droapdown Image Accounts Javascript---------------------->
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function accountFunction() {
+document.getElementById("myDropdown").classList.toggle("show");
+}
+  
+//Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+if (!e.target.matches('.dropbtn_profile_image')) {
+var myDropdown = document.getElementById("myDropdown");
+if (myDropdown.classList.contains('show')) {
+myDropdown.classList.remove('show');
+}
+}
+}
+</script>
+<!------------------------------Show Product Details------------------------>
 {% for PRODUCT_DETAILS in CURRENT_PRODUCT_DETAIS %}
-<div>
-<strong>{{PRODUCT_DETAILS.details}}</strong>
+<div style="margin-top: 80px;text-align: center;font-size: 120%;">
+<strong>
+<pre>{{PRODUCT_DETAILS.details}}</pre>
+</strong>
 </div>
 {% endfor %}
 

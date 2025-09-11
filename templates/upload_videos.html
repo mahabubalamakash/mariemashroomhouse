@@ -15,7 +15,6 @@ background-color: whitesmoke;
 padding: 8px;
 width: 100%;
 box-shadow: 2px 2px 2px 2px gray;
-z-index: 1;
 }
 .main_div{
 display: grid;
@@ -41,7 +40,7 @@ padding: 10px;
 <!----------------------------Top Navigation Bar-------------------------->
 <div id="navigation_bar"  class="navigation_bar">
 <a href="/" style="text-decoration: none;"><img src="{% static 'Logo/home.ico' %}" style="width: 30px;height: 30px;"></a>
-<a href="#" style="text-decoration: none;"><img src="{% static 'Logo/notificationl.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
+<a href="/{{request.user.profile_model.pk}}/NOTIFICATON_PAGE_VIEW" style="text-decoration: none;"><img src="{% static 'Logo/notificationl.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
 <a href="/{{request.user.profile_model.pk}}/FINDE_FRIEND" style="text-decoration: none;"><img src="{% static 'Logo/find friend.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
 <a href="/{{request.user.profile_model.pk}}/INCOMMING_MESSAGE_PAGE" style="text-decoration: none;"><img src="{% static 'Logo/messenger.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
 <a href="/{{request.user.profile_model.pk}}/VIDEOS_CONTENT" style="text-decoration: none;"><img src="{% static 'Logo/videos.ico' %}" style="width: 30px;height: 30px;margin-left: 15px;"></a>
